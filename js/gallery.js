@@ -1,6 +1,6 @@
 const galleryContainer = document.getElementById('galleryContainer');
-const folderPath = '/images/gallery/img';
-const maxTry = 1000;
+const folderPath = 'images/gallery/img';
+const maxTry = 200;
 const extensions = ['jpg', 'jpeg', 'png', 'webp'];
 
 let galleryData = [];
