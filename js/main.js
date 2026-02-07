@@ -147,7 +147,7 @@ window.addEventListener('scroll', () => {
     if (hero) hero.style.transform = `translateY(${scrolled * 0.5}px)`;
 });
 function rebuildGalleryFromFolder() {
-    const folderPath = 'images/gallery/img';
+    const folderPath = '/EverestFootballClub/images/gallery/img';
     const maxTry = 100;
     const extensions = ['jpg', 'jpeg', 'png', 'webp'];
 
