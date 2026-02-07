@@ -1,0 +1,127 @@
+
+
+nav {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+}
+
+nav a {
+  text-decoration: none;
+  color: #4e8cff;
+  font-weight: 600;
+  font-size: 14px;
+  transition: color 0.2s;
+}
+
+nav a:hover {
+  color: #3a6ed9;
+}
+/* ================= GLOBAL ================= */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Inter', sans-serif;
+}
+
+body {
+  background: #f0f4ff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  color: #333;
+}
+
+/* ================= LOGIN FORM ================= */
+form {
+  background: #ffffff;
+  padding: 35px 30px;
+  border-radius: 12px;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+  width: 350px;
+  text-align: center;
+  position: relative;
+}
+
+form h2 {
+  margin-bottom: 25px;
+  color: #1f2937;
+  font-weight: 700;
+}
+
+input {
+  width: 100%;
+  padding: 12px 15px;
+  margin: 12px 0;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 14px;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+input:focus {
+  border-color: #4e8cff;
+  box-shadow: 0 0 6px rgba(78, 140, 255, 0.3);
+  outline: none;
+}
+
+button {
+  width: 100%;
+  padding: 12px;
+  margin-top: 10px;
+  border: none;
+  border-radius: 8px;
+  background: #4e8cff;
+  color: #fff;
+  font-weight: 600;
+  font-size: 15px;
+  transition: 0.2s;
+}
+
+button:hover {
+  background: #3a6ed9;
+}
+
+/* ================= ERROR MESSAGE ================= */
+.error {
+  background: #ffeded;
+  color: #d93025;
+  font-size: 14px;
+  padding: 10px 12px;
+  border-radius: 8px;
+  margin-bottom: 15px;
+  display: none; /* show via JS */
+  text-align: center;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+}
+
+/* ================= BACK LINK ================= */
+.back-link {
+  display: block;
+  text-align: center;
+  margin-top: 15px;
+  color: #4e8cff;
+  font-size: 14px;
+  text-decoration: none;
+  transition: 0.2s;
+}
+
+.back-link:hover {
+  color: #3a6ed9;
+  text-decoration: underline;
+}
+
+/* ================= RESPONSIVE ================= */
+@media (max-width: 400px) {
+  form {
+    width: 90%;
+    padding: 25px 20px;
+  }
+
+  input, button {
+    font-size: 14px;
+    padding: 10px 12px;
+  }
+}

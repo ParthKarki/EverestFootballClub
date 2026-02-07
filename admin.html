@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Admin Dashboard - Everest FC</title>
+  <link rel="stylesheet" href="css/admin.css">
+</head>
+<body>
+
+<h2>Everest FC Admin Dashboard</h2>
+<button id="logoutBtn" style="margin-bottom:20px;">Logout</button>
+
+<!-- Message area for success/error feedback -->
+<div id="message" style="margin-bottom:15px; padding:10px; border-radius:5px; display:none;"></div>
+
+<form id="teamForm">
+  <input type="hidden" id="teamId">
+  <h3>Add / Edit Team</h3>
+  <label>Team Name:</label>
+  <input type="text" id="teamName" placeholder="Enter team name" required>
+  <label>Coach Name:</label>
+  <input type="text" id="coach" placeholder="Enter coach name" required>
+
+  <h4>Players</h4>
+  <div id="playersContainer" class="playersContainer"></div>
+  <button type="button" id="addPlayer">Add Player</button><br><br>
+
+  <button type="submit">Save Team</button>
+  <button type="button" id="resetForm">Reset Form</button>
+</form>
+
+<h3>Existing Teams</h3>
+<div id="teamsList"></div>
+
+<script type="module" src="js/admin.js"></script>
+</body>
+</html>

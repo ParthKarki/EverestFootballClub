@@ -1,0 +1,586 @@
+/* ================= GLOBAL ================= */
+:root {
+  --primary-blue: #0A2E6D;
+  --secondary-blue: #1E5BB8;
+  --accent-gold: #F2B705;
+  --light-bg: #F9FAFB;
+  --dark-gray: #111827;
+  --soft-gray: #6B7280;
+  --white: #FFFFFF;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  line-height: 1.6;
+  color: var(--dark-gray);
+  background: var(--light-bg);
+  overflow-x: hidden;
+}
+
+/* ================= ANIMATIONS ================= */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}
+
+.animate-on-scroll {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.animate-on-scroll.animated {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ================= HEADER ================= */
+header {
+  background: rgba(255,255,255,0.95);
+  border-bottom: 1px solid rgba(10,46,109,0.1);
+  backdrop-filter: blur(10px);
+  position: fixed;
+  width: 100%;
+  top: 0;
+  z-index: 1000;
+  transition: all 0.3s ease;
+}
+
+header.scrolled {
+  box-shadow: 0 4px 30px rgba(0,0,0,0.08);
+}
+
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 1.2rem 3rem;
+}
+
+.logo {
+  font-size: 1.6rem;
+  font-weight: 900;
+  color: var(--primary-blue);
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.logo:hover { transform: scale(1.05); }
+
+.logo-icon {
+    width: 45px;
+    height: 45px;
+    background: linear-gradient(135deg, #dbe4f5, #e0ebf9);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    color: #FFFFFF;
+    box-shadow: 0 6px 16px rgba(11, 60, 138, 0.35);
+    animation: pulse 2s infinite;
+}
+
+.nav-links {
+  display: flex;
+  list-style: none;
+  gap: 2.5rem;
+  align-items: center;
+}
+
+.nav-links a {
+  color: var(--soft-gray);
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 1rem;
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--primary-blue), var(--secondary-blue));
+  transition: width 0.3s ease;
+}
+
+.nav-links a:hover {
+  color: var(--primary-blue);
+  transform: translateY(-2px);
+}
+
+.nav-links a:hover::after { width: 100%; }
+
+.nav-cta {
+  background: linear-gradient(135deg, var(--accent-gold), #FFD24D);
+  color: var(--primary-blue);
+  padding: 0.7rem 1.8rem;
+  border-radius: 10px;
+  font-weight: 800;
+  box-shadow: 0 6px 18px rgba(242,183,5,0.35);
+  transition: all 0.3s ease;
+}
+
+.nav-cta:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(242,183,5,0.55);
+}
+
+.menu-toggle {
+  display: none;
+  flex-direction: column;
+  cursor: pointer;
+}
+
+.menu-toggle span {
+  width: 26px;
+  height: 2px;
+  background: var(--soft-gray);
+  margin: 4px 0;
+  border-radius: 2px;
+  transition: 0.3s ease;
+}
+
+/* ================= TEAMS SECTION ================= */
+.teams-section {
+  padding: 7rem 2rem;
+  background: var(--light-bg);
+}
+
+.section-title {
+  text-align: center;
+  font-size: 3rem;
+  font-weight: 900;
+  color: var(--dark-gray);
+  margin-bottom: 3rem;
+  animation: fadeInUp 1s ease forwards;
+}
+
+/* ================= TEAMS GRID ================= */
+.teams-container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2.5rem;
+  max-width: 1300px;
+  margin: 0 auto;
+}
+
+@media (max-width: 768px) {
+  .teams-container {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ================= TEAM CARD ================= */
+.team-card {
+  background: var(--white);
+  border-radius: 16px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+  overflow: hidden;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  transition: all 0.4s ease;
+  animation: fadeInUp 0.5s ease forwards;
+}
+
+.team-card:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 20px 50px rgba(0,0,0,0.12);
+}
+
+.team-header {
+  display: flex;
+  align-items: center;
+  padding: 1.5rem 2rem;
+  background: linear-gradient(135deg, var(--primary-blue), var(--secondary-blue));
+  color: var(--white);
+  gap: 1.5rem;
+  border-bottom: 1px solid rgba(255,255,255,0.2);
+  border-radius: 16px 16px 0 0;
+  transition: all 0.3s ease;
+}
+
+.team-header:hover {
+  background: linear-gradient(135deg, var(--secondary-blue), var(--primary-blue));
+}
+
+.team-logo {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: var(--white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  flex-shrink: 0;
+}
+
+.team-logo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+  transition: transform 0.3s ease;
+}
+
+.team-card:hover .team-logo img {
+  transform: scale(1.1);
+}
+
+.team-info h3 {
+  margin: 0 0 0.3rem;
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.team-info p {
+  margin: 0;
+  font-size: 0.95rem;
+}
+
+/* ================= TEAM PLAYERS ================= */
+.team-players {
+  padding: 1rem 2rem;
+  background: #F3F4F6;
+  overflow-x: auto;
+  border-radius: 0 0 16px 16px;
+}
+
+.team-players table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+}
+
+.team-players th, .team-players td {
+  text-align: left;
+  padding: 0.75rem 0.5rem;
+  border-bottom: 1px solid #E5E7EB;
+}
+
+.team-players th {
+  color: var(--primary-blue);
+  font-weight: 600;
+}
+
+.team-players tr:hover {
+  background: rgba(10,46,109,0.05);
+}
+
+/* ================= FOOTER ================= */
+footer {
+  background: var(--dark-gray);
+  color: var(--white);
+  text-align: center;
+  padding: 4rem 2rem 3rem;
+}
+
+.footer-logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+}
+
+.footer-logo-icon {
+  width: 50px;
+  height: 50px;
+  background: linear-gradient(135deg, var(--primary-blue), var(--secondary-blue));
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+}
+
+footer p {
+  color: #9CA3AF;
+  margin: 0.5rem 0;
+  font-size: 0.95rem;
+}
+
+/* ================= RESPONSIVE ================= */
+@media (max-width: 768px) {
+  nav {
+    padding: 1rem 1.5rem;
+  }
+
+  .nav-links {
+    position: fixed;
+    left: -100%;
+    top: 77px;
+    flex-direction: column;
+    background: var(--white);
+    width: 100%;
+    text-align: center;
+    transition: 0.3s;
+    padding: 2rem 0;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    gap: 1.5rem;
+  }
+
+  .nav-links.active { left: 0; }
+  .menu-toggle { display: flex; }
+}
+/* ================= RESPONSIVE IMPROVEMENTS ================= */
+
+/* ----- TABLE SCROLL FOR MOBILE ----- */
+@media (max-width: 768px) {
+  .team-players {
+    padding: 1rem;
+    overflow-x: auto;
+  }
+
+  .team-players table {
+    min-width: 600px; /* ensures table scrolls horizontally */
+  }
+
+  .team-info h3 {
+    font-size: 1.3rem;
+  }
+
+  .team-info p {
+    font-size: 0.9rem;
+  }
+
+  .team-card {
+    margin-bottom: 2rem;
+  }
+
+  .teams-container {
+    grid-template-columns: 1fr; /* single column layout for mobile */
+    gap: 2rem;
+    padding: 0 1rem;
+  }
+}
+
+/* ----- HEADER NAVIGATION MOBILE ----- */
+@media (max-width: 480px) {
+  .logo {
+    font-size: 1.3rem;
+  }
+
+  .logo-icon {
+    width: 40px;
+    height: 40px;
+    font-size: 1.2rem;
+  }
+
+  .nav-links a {
+    font-size: 0.95rem;
+  }
+
+  .nav-cta {
+    padding: 0.5rem 1.2rem;
+    font-size: 0.85rem;
+  }
+
+  nav {
+    padding: 0.8rem 1rem;
+  }
+}
+
+/* ----- TEAM CARD RESPONSIVE ----- */
+@media (max-width: 600px) {
+  .team-card {
+    flex-direction: column;
+  }
+
+  .team-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+    padding: 1rem;
+  }
+
+  .team-logo {
+    width: 60px;
+    height: 60px;
+  }
+
+  .team-info h3 {
+    font-size: 1.2rem;
+  }
+
+  .team-info p {
+    font-size: 0.85rem;
+  }
+
+  .team-players {
+    padding: 0.5rem;
+  }
+
+  .team-players th, .team-players td {
+    padding: 0.5rem 0.3rem;
+    font-size: 0.85rem;
+  }
+}
+
+/* ----- FOOTER RESPONSIVE ----- */
+@media (max-width: 768px) {
+  footer {
+    padding: 3rem 1rem;
+    display: flex;
+    flex-direction: column-reverse; /* stack columns in reverse order */
+    gap: 2rem; /* spacing between sections */
+    justify-content: flex-start;    /* align vertically at the top */
+    align-items: center;            /* center horizontally */
+  }
+element.style {
+    display: flex;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    align-items: center;
+    flex-direction: column-reverse;
+    align-content: space-around;
+    justify-content: space-evenly;
+ }
+
+  footer p {
+    font-size: 0.85rem;
+    text-align: center;
+  }
+
+  /* Optional: if you have two columns inside footer, make them full width */
+  footer > div {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+  }
+}
+
+/* ----- SMOOTH SCROLL FIX ----- */
+html {
+  scroll-behavior: smooth;
+}
+@media (max-width: 768px) {
+     nav {
+         padding: 1rem 1.5rem;
+     }
+
+     .nav-links {
+         position: fixed;
+         left: -100%;
+         top: 77px;
+         flex-direction: column;
+         background: white;
+         width: 100%;
+         text-align: center;
+         transition: 0.3s;
+         padding: 2rem 0;
+         box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+         gap: 1.5rem;
+     }
+
+     .nav-links.active {
+         left: 0;
+     }
+
+     .menu-toggle {
+         display: flex;
+     }
+
+     .hero-content h1 {
+         font-size: 3rem;
+     }
+
+     h2 {
+         font-size: 2.5rem;
+     }
+
+     .programs-grid,
+     .coaches-grid,
+     .gallery-grid,
+     .facilities-grid,
+     .testimonials-grid {
+         grid-template-columns: 1fr;
+     }
+
+     .stat-card {
+         border-right: none;
+         border-bottom: 1px solid #f3f4f6;
+     }
+
+     .stat-card:last-child {
+         border-bottom: none;
+     }
+ }
+ /* Footer default (desktop) */
+footer {
+  padding: 4rem 2rem;
+  border-top: 2px solid var(--primary-blue);
+}
+
+footer .footer-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  align-items: start;
+}
+
+/* Left Column (logo + info) */
+footer .footer-left {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+/* Right Column (map) */
+footer .footer-right {
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+}
+
+/* Mobile / tablet responsiveness */
+@media (max-width: 768px) {
+  footer .footer-container {
+    display: flex;
+    flex-direction: column-reverse; /* map first, logo/info below */
+    gap: 2rem;
+    align-items: center;
+    justify-content: center;
+  }
+
+  footer .footer-left {
+    align-items: center;
+    text-align: center;
+  }
+
+  footer .footer-left p, 
+  footer .footer-left a {
+    font-size: 0.85rem;
+  }
+
+  footer iframe {
+    height: 250px;
+  }
+}

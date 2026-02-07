@@ -1,0 +1,165 @@
+/* ================= GLOBAL ================= */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Inter', sans-serif;
+}
+
+body {
+  background: #f0f4ff;
+  padding: 20px;
+  color: #333;
+}
+
+h2, h3, h4 {
+  margin-bottom: 15px;
+  color: #1f2937;
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  border-radius: 6px;
+  padding: 8px 14px;
+  background: #4e8cff;
+  color: #fff;
+  font-weight: 600;
+  transition: 0.2s;
+}
+
+button:hover {
+  background: #3a6ed9;
+}
+
+input {
+  padding: 10px 12px;
+  margin: 8px 0;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  width: 100%;
+  font-size: 14px;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+input:focus {
+  border-color: #4e8cff;
+  box-shadow: 0 0 5px rgba(78, 140, 255, 0.3);
+  outline: none;
+}
+
+form {
+  background: #ffffff;
+  padding: 30px 25px;
+  border-radius: 12px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.05);
+  margin-bottom: 30px;
+  position: relative;
+}
+
+/* ================= MESSAGE BOX ================= */
+#message {
+  padding: 12px 20px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  font-weight: 600;
+  text-align: center;
+  font-size: 14px;
+  display: none; /* hidden by default */
+  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+}
+
+/* Success and error colors handled via JS */
+
+/* ================= PLAYERS ================= */
+.playersContainer .player {
+  background: #e7f0ff;
+  padding: 12px 15px;
+  margin-bottom: 12px;
+  border-radius: 10px;
+  position: relative;
+  transition: background 0.2s;
+}
+
+.playersContainer .player:hover {
+  background: #d6e4ff;
+}
+
+.removePlayer {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: #ff4e4e;
+  padding: 4px 8px;
+  font-size: 12px;
+  border-radius: 4px;
+}
+
+.removePlayer:hover {
+  background: #d93a3a;
+}
+
+/* ================= TEAMS ================= */
+.team {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 25px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+
+.team-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+  flex-wrap: wrap;
+}
+
+.team-header button {
+  margin-left: 5px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 12px;
+}
+
+th, td {
+  border: 1px solid #ccc;
+  padding: 8px 12px;
+  text-align: left;
+  font-size: 14px;
+}
+
+th {
+  background: #4e8cff;
+  color: #fff;
+  font-weight: 600;
+  text-align: center;
+}
+
+td {
+  text-align: center;
+}
+
+/* ================= RESPONSIVE ================= */
+@media (max-width: 700px) {
+  .team-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .team-header button {
+    margin: 5px 0 0 0;
+  }
+
+  input, button {
+    font-size: 14px;
+  }
+
+  form {
+    padding: 25px 20px;
+  }
+}

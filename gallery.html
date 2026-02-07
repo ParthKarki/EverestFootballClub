@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Elite Soccer Academy - Gallery</title>
+
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+
+  <!-- CSS -->
+   <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/gallery.css">
+</head>
+<body>
+
+  <div class="progress-bar" id="progressBar"></div>
+  
+  <header id="header">
+    <nav>
+      <div class="logo" onclick="scrollToSection('home')">
+        <div class="logo-icon"><img src="/images/logo.png" alt="no logo" height="76rem" width="76rem"></div>
+        <span class="club-name">Everest FC</span>
+      </div>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="index.html#home">Home</a></li>
+        <li><a href="index.html#programs">Programs</a></li>
+        <li><a href="index.html#coaches">Coaches</a></li>
+        <li><a href="index.html#facilities">Facilities</a></li>
+        <li><a href="index.html#testimonials">Testimonials</a></li>
+        <li><a href="gallery.html" class="nav-cta">Gallery</a></li>
+        <li><a href="team.html">Our Team</a></li>
+        <li><a href="admin.html">Admin</a></li>
+        <li><a href="index.html#contact">Contact</a></li>
+      </ul>
+      <div class="menu-toggle" id="menuToggle"><span></span><span></span><span></span></div>
+    </nav>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero" id="home">
+    <div class="floating-ball">⚽</div>
+    <div class="floating-ball">⚽</div>
+    <div class="floating-ball">⚽</div>
+    <div class="hero-content">
+      <div class="hero-badge">📸 Gallery</div>
+      <h1>Elite Soccer<br><span>Moments Captured</span></h1>
+      <p>Explore our academy through pictures of training, matches, and events showcasing our talented athletes.</p>
+    </div>
+  </section>
+
+  <!-- Full Gallery Section -->
+  <section class="gallery-section" id="gallery">
+    <div class="gallery-header">
+      <div>
+        <h2 class="animate-on-scroll">Gallery</h2>
+        <p class="section-subtitle animate-on-scroll">Moments from our academy</p>
+      </div>
+
+    <div id="galleryContainer" class="gallery-grid"></div>
+  </section>
+
+ <footer>
+  <div class="footer-container">
+    <!-- Left Column: Logo & Info -->
+    <div class="footer-left">
+      <div style="display:flex; align-items:center; justify-content: center;gap:1rem;">
+        <div style="width:76px; height:76px; border-radius:12px; overflow:hidden; box-shadow:0 4px 12px rgba(0,0,0,0.1);">
+          <img src="/images/logo.jpeg" alt="Everest FC Logo" style="width:100%; height:100%; object-fit:cover;">
+        </div>
+        <span style="font-family:'Bebas Neue', sans-serif; font-size:2rem; color:var(--primary-blue); text-transform:uppercase;">Everest FC</span>
+      </div>
+
+      <div style="color:var(--dark-gray); line-height:1.6;">
+        <p>YMCA Sports Complex</p>
+        <p>716 Sector 17, Faridabad, Haryana 121002, India</p>
+        <p>Phone: +91 9654836936</p>
+        <p>Email: <a href="mailto:karkiparth@gmail.com" style="color:var(--secondary-blue); text-decoration:none;">karkiparth@gmail.com</a></p>
+      </div>
+
+      <p style="margin-top:1rem; font-size:0.85rem; color:var(--soft-gray);">© 2026 Everest FC. All rights reserved.</p>
+    </div>
+
+    <!-- Right Column: Google Map -->
+    <div class="footer-right">
+      <iframe 
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7018.826639181113!2d77.32886488931216!3d28.40678276502827!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390cddaa968380ab%3A0xe59af6d73c361f9c!2sYMCA%20Faridabad%20Sports%20Complex!5e0!3m2!1sen!2sca!4v1770177348658!5m2!1sen!2sca" 
+        width="100%" 
+        height="300" 
+        style="border:0;" 
+        allowfullscreen="" 
+        loading="lazy" 
+        referrerpolicy="no-referrer-when-downgrade">
+      </iframe>
+    </div>
+  </div>
+</footer>
+
+
+  <script src="/js/gallery.js"></script>
+</body>
+</html>
