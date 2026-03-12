@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import {
   initMenuToggle,
   initProgressBar,
@@ -5,6 +6,12 @@ import {
   initScrollTop,
   initScrollAnimations
 } from "./ui.js";
+=======
+const galleryContainer = document.getElementById('galleryContainer');
+const folderPath = 'images/gallery/img';
+const maxTry = 200;
+const extensions = ['jpg', 'jpeg', 'png', 'webp'];
+>>>>>>> 3089d77d1e33815589b3ed624237eb7c0df18393
 
 initMenuToggle();
 initProgressBar();
@@ -123,3 +130,8 @@ lightbox.style.display="none";
 }
 window.addEventListener("load",loadGallery);
 
+<<<<<<< HEAD
+=======
+    document.querySelectorAll('.animate-on-scroll').forEach(el => observer.observe(el));
+}
+>>>>>>> 3089d77d1e33815589b3ed624237eb7c0df18393
