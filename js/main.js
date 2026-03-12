@@ -152,7 +152,7 @@ window.addEventListener('scroll', () => {
     if (hero) hero.style.transform = `translateY(${scrolled * 0.5}px)`;
 });
 function rebuildGalleryFromFolder() {
-    const folderPath = "images/gallery";
+    const folderPath = "images/gallery/";
     const maxTry = 100;
     const extensions = ['jpg', 'jpeg', 'png', 'webp'];
 
