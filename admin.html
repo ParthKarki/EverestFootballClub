@@ -1,37 +1,195 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <title>Admin Dashboard - Everest FC</title>
-  <link rel="stylesheet" href="css/admin.css">
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Everest FC Admin Dashboard</title>
+
+<link rel="stylesheet" href="css/admin.css">
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
 </head>
+
 <body>
 
+<header class="topbar">
+
 <h2>Everest FC Admin Dashboard</h2>
-<button id="logoutBtn" style="margin-bottom:20px;">Logout</button>
 
-<!-- Message area for success/error feedback -->
-<div id="message" style="margin-bottom:15px; padding:10px; border-radius:5px; display:none;"></div>
+<button id="logoutBtn">Logout</button>
 
-<form id="teamForm">
-  <input type="hidden" id="teamId">
-  <h3>Add / Edit Team</h3>
-  <label>Team Name:</label>
-  <input type="text" id="teamName" placeholder="Enter team name" required>
-  <label>Coach Name:</label>
-  <input type="text" id="coach" placeholder="Enter coach name" required>
+</header>
 
-  <h4>Players</h4>
-  <div id="playersContainer" class="playersContainer"></div>
-  <button type="button" id="addPlayer">Add Player</button><br><br>
 
-  <button type="submit">Save Team</button>
-  <button type="button" id="resetForm">Reset Form</button>
+<div id="message" class="message"></div>
+
+
+<div class="dashboard-container">
+
+
+<!-- LEFT SIDE -->
+
+<div class="left-panel">
+
+
+<!-- SEARCH TEAM -->
+
+<section class="search-section">
+
+<input
+id="searchTeam"
+placeholder="Search team..."
+autocomplete="off"
+>
+
+</section>
+
+
+
+<!-- TEAM FORM -->
+
+<section class="form-card">
+
+<form id="teamForm" class="admin-form" autocomplete="off">
+
+<input type="hidden" id="teamId">
+
+<h3>Add / Edit Team</h3>
+
+
+<div class="form-group">
+
+<label>Team Name</label>
+
+<input
+type="text"
+id="teamName"
+placeholder="Team name"
+required
+>
+
+</div>
+
+
+<div class="form-group">
+
+<label>Coach</label>
+
+<input
+type="text"
+id="coach"
+placeholder="Coach name"
+required
+>
+
+</div>
+
+
+<h4>Players</h4>
+
+
+<div id="playersContainer"></div>
+
+
+<div class="admin-buttons">
+
+<button type="button" id="addPlayer">
+Add Player
+</button>
+
+</div>
+
+
+<div class="admin-buttons">
+
+<button type="submit">
+Save Team
+</button>
+
+<button type="button" id="resetForm">
+Reset
+</button>
+
+</div>
+
 </form>
 
-<h3>Existing Teams</h3>
+</section>
+
+</div>
+
+
+
+<!-- RIGHT SIDE -->
+
+<div class="right-panel">
+
+<section>
+
+<h3>Teams</h3>
+
 <div id="teamsList"></div>
 
+</section>
+
+</div>
+
+</div>
+
+
+
+<template id="playerTemplate">
+
+<div class="player-card">
+
+<div class="player-summary">
+
+<span class="player-title">Player</span>
+
+<span class="player-name-preview"></span>
+
+<button type="button" class="togglePlayer">Edit</button>
+
+<button type="button" class="removePlayer">Remove</button>
+
+</div>
+
+
+<div class="player-editor">
+
+<div class="form-group full">
+<label>Player Name</label>
+<input type="text" class="playerName">
+</div>
+
+<div class="form-group">
+<label>Jersey</label>
+<input type="number" class="playerNumber">
+</div>
+
+<div class="form-group">
+<label>Age</label>
+<input type="number" class="playerAge">
+</div>
+
+<div class="form-group full">
+<label>Position</label>
+<input type="text" class="playerPosition">
+</div>
+
+</div>
+
+</div>
+
+</template>
+
+
 <script type="module" src="js/admin.js"></script>
+
 </body>
+
 </html>

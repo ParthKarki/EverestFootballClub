@@ -1,33 +1,39 @@
-import { initializeApp } from "https://www.gstatic.com/firebasejs/12.8.0/firebase-app.js";
-import { getFirestore, collection, addDoc, getDocs, doc, updateDoc, deleteDoc } from "https://www.gstatic.com/firebasejs/12.8.0/firebase-firestore.js";
-import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/12.8.0/firebase-auth.js";
+import { db, auth } from "./firebase.js";
+import { initMenuToggle, initProgressBar } from "./ui.js";
 
-// Firebase config
-const firebaseConfig = {
-  apiKey: "AIzaSyB_BElquXYWy6uRuGKqM7VgmZ0QUJMU43I",
-  authDomain: "everestfc-efc777.firebaseapp.com",
-  projectId: "everestfc-efc777",
-  storageBucket: "everestfc-efc777.appspot.com",
-  messagingSenderId: "983221158380",
-  appId: "1:983221158380:web:d9aac4d382ee3654bf40c9",
-  measurementId: "G-L7M2NQS8RK"
-};
+import {
+  collection,
+  addDoc,
+  doc,
+  updateDoc,
+  deleteDoc,
+  onSnapshot
+} from "https://www.gstatic.com/firebasejs/12.8.0/firebase-firestore.js";
 
-const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
-const auth = getAuth(app);
+import {
+  onAuthStateChanged,
+  signOut
+} from "https://www.gstatic.com/firebasejs/12.8.0/firebase-auth.js";
 
-// Check login
+/* ---------------- UI INIT ---------------- */
+
+initMenuToggle();
+initProgressBar();
+
+/* ---------------- AUTH GUARD ---------------- */
+
 onAuthStateChanged(auth, user => {
   if (!user) window.location.href = "login.html";
 });
 
-// Logout
+/* ---------------- LOGOUT ---------------- */
+
 document.getElementById("logoutBtn").addEventListener("click", () =>
   signOut(auth).then(() => window.location.href = "login.html")
 );
 
-// Elements
+/* ---------------- ELEMENTS ---------------- */
+
 const form = document.getElementById("teamForm");
 const teamIdInput = document.getElementById("teamId");
 const teamNameInput = document.getElementById("teamName");
@@ -37,143 +43,275 @@ const addPlayerBtn = document.getElementById("addPlayer");
 const resetBtn = document.getElementById("resetForm");
 const teamsList = document.getElementById("teamsList");
 const messageDiv = document.getElementById("message");
+const searchInput = document.getElementById("searchTeam");
 
-// Show professional messages
+const playerTemplate = document.getElementById("playerTemplate");
+
+let allTeams = [];
+
+/* ---------------- MESSAGE ---------------- */
+
 function showMessage(text, type = "success") {
+
   messageDiv.textContent = text;
   messageDiv.style.display = "block";
   messageDiv.style.opacity = "1";
-  messageDiv.style.background = type === "error" ? "#ff4e4e" : "#4e8cff";
+
+  messageDiv.style.background =
+    type === "error" ? "#ff4e4e" : "#4e8cff";
+
   messageDiv.style.color = "#fff";
+
   setTimeout(() => {
+
     messageDiv.style.transition = "opacity 0.5s";
     messageDiv.style.opacity = "0";
-    setTimeout(() => { messageDiv.style.display = "none"; }, 500);
+
+    setTimeout(() => {
+      messageDiv.style.display = "none";
+    }, 500);
+
   }, 3000);
 }
 
-// Create player input block
-function createPlayerBlock(player = {}) {
-  const div = document.createElement("div");
-  div.classList.add("player");
-  div.innerHTML = `
-    <label>Player Name:</label><input type="text" class="pname" value="${player.name||''}" required>
-    <label>Jersey Number:</label><input type="number" class="pjersey" value="${player.jersey||''}" required>
-    <label>Age:</label><input type="number" class="page" value="${player.age||''}" required>
-    <label>Position:</label><input type="text" class="pposition" value="${player.position||''}" required>
-    <button type="button" class="removePlayer">Remove Player</button>
-  `;
-  div.querySelector(".removePlayer").addEventListener("click", () => div.remove());
-  playersContainer.appendChild(div);
-}
+/* ---------------- CREATE PLAYER CARD ---------------- */
 
-addPlayerBtn.addEventListener("click", () => createPlayerBlock());
-resetBtn.addEventListener("click", () => {
-  form.reset(); 
-  teamIdInput.value = ""; 
-  playersContainer.innerHTML = "";
+function createPlayerBlock(player = {}) {
+
+  const clone = playerTemplate.content.cloneNode(true);
+  const card = clone.querySelector(".player-card");
+
+  const nameInput = clone.querySelector(".playerName");
+  const jerseyInput = clone.querySelector(".playerNumber");
+  const ageInput = clone.querySelector(".playerAge");
+  const positionInput = clone.querySelector(".playerPosition");
+  const preview = clone.querySelector(".player-name-preview");
+
+  nameInput.value = player.name || "";
+  jerseyInput.value = player.jersey || "";
+  ageInput.value = player.age || "";
+  positionInput.value = player.position || "";
+
+  preview.textContent =
+    `${player.jersey ? "#" + player.jersey : ""} ${player.name || "Unnamed player"}`;
+
+  /* toggle editor */
+
+ clone.querySelector(".togglePlayer").addEventListener("click", (e) => {
+
+  card.classList.toggle("open");
+
+  e.target.textContent =
+    card.classList.contains("open") ? "Close" : "Edit";
+
+});
+  /* remove player */
+
+  clone.querySelector(".removePlayer").addEventListener("click", () => {
+    card.remove();
+  });
+
+  /* update preview */
+
+  function updatePreview(){
+    const name = nameInput.value || "Unnamed";
+    const jersey = jerseyInput.value ? "#" + jerseyInput.value : "";
+    preview.textContent = `${jersey} ${name}`;
+  }
+
+  nameInput.addEventListener("input", updatePreview);
+  jerseyInput.addEventListener("input", updatePreview);
+
+  /* ADD TO PAGE (missing before) */
+
+  playersContainer.appendChild(clone);
+
+}
+/* ---------------- ADD PLAYER ---------------- */
+
+addPlayerBtn.addEventListener("click", () => {
+  createPlayerBlock();
+  const last = playersContainer.lastElementChild;
+  if(last) last.classList.add("open");
 });
 
-// Save team
+/* ---------------- RESET FORM ---------------- */
+
+resetBtn.addEventListener("click", () => {
+
+  form.reset();
+  teamIdInput.value = "";
+  playersContainer.innerHTML = "";
+
+});
+
+/* ---------------- SAVE TEAM ---------------- */
+
 form.addEventListener("submit", async e => {
+
   e.preventDefault();
+
+const players = Array.from(
+  playersContainer.querySelectorAll(".player-card")
+)
+.map(card => ({
+  name: card.querySelector(".playerName").value.trim(),
+  jersey: card.querySelector(".playerNumber").value,
+  age: card.querySelector(".playerAge").value,
+  position: card.querySelector(".playerPosition").value.trim()
+}))
+.filter(p => p.name !== "" && p.jersey !== "" && p.age !== "");
+
+  if (!teamNameInput.value.trim()) {
+    showMessage("Team name required", "error");
+    return;
+  }
+
   const teamData = {
     teamName: teamNameInput.value,
     coach: coachInput.value,
-    players: Array.from(playersContainer.children).map(div => ({
-      name: div.querySelector(".pname").value,
-      jersey: Number(div.querySelector(".pjersey").value),
-      age: Number(div.querySelector(".page").value),
-      position: div.querySelector(".pposition").value
-    }))
+    players
   };
 
   try {
+
     if (teamIdInput.value) {
-      await updateDoc(doc(db, "teams", teamIdInput.value), teamData);
-      showMessage("✅ Team updated successfully!");
+
+      await updateDoc(
+        doc(db, "teams", teamIdInput.value),
+        teamData
+      );
+
+      showMessage("Team updated");
+
     } else {
-      await addDoc(collection(db, "teams"), teamData);
-      showMessage("✅ Team added successfully!");
+
+      await addDoc(
+        collection(db, "teams"),
+        teamData
+      );
+
+      showMessage("Team added");
+
     }
-    form.reset(); 
-    playersContainer.innerHTML = ""; 
+
+    form.reset();
+    playersContainer.innerHTML = "";
     teamIdInput.value = "";
-    loadTeams();
+
   } catch (err) {
+
     console.error(err);
-    showMessage("❌ Error saving team.", "error");
+    showMessage("Error saving team", "error");
+
   }
+
 });
 
-// Load teams
-async function loadTeams() {
+/* ---------------- RENDER TEAMS ---------------- */
+
+function renderTeams(teams) {
+
   teamsList.innerHTML = "";
-  const snapshot = await getDocs(collection(db, "teams"));
-  snapshot.forEach(docSnap => {
-    const team = docSnap.data();
+
+  teams.forEach(team => {
+
+    const playersRows = team.players
+      .sort((a,b)=>a.jersey-b.jersey)
+      .map(p => `
+        <tr>
+          <td>${p.name}</td>
+          <td>${p.jersey}</td>
+          <td>${p.age}</td>
+          <td>${p.position}</td>
+        </tr>
+      `).join("");
+
     const div = document.createElement("div");
     div.classList.add("team");
+
     div.innerHTML = `
       <div class="team-header">
         <strong>${team.teamName} (Coach: ${team.coach})</strong>
-        <div>
+        <div class="team-actions">
           <button class="edit">Edit</button>
-          <button class="delete" style="background:#ff4e4e;">Delete</button>
+          <button class="delete">Delete</button>
         </div>
       </div>
+
       <table>
-        <thead><tr><th>Player</th><th>Jersey</th><th>Age</th><th>Position</th></tr></thead>
-        <tbody>${team.players.map(p => `<tr><td>${p.name}</td><td>${p.jersey}</td><td>${p.age}</td><td>${p.position}</td></tr>`).join('')}</tbody>
+        <thead>
+          <tr>
+            <th>Player</th>
+            <th>Jersey</th>
+            <th>Age</th>
+            <th>Position</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          ${playersRows}
+        </tbody>
       </table>
     `;
 
-    // Edit
+    /* EDIT TEAM */
+
     div.querySelector(".edit").addEventListener("click", () => {
-      teamIdInput.value = docSnap.id;
+
+      teamIdInput.value = team.id;
       teamNameInput.value = team.teamName;
       coachInput.value = team.coach;
+
       playersContainer.innerHTML = "";
+
       team.players.forEach(p => createPlayerBlock(p));
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+
+      window.scrollTo({ top: 0, behavior: "smooth" });
+
     });
 
-    // Delete with inline confirmation
+    /* DELETE TEAM */
+
     div.querySelector(".delete").addEventListener("click", () => {
-      if (div.querySelector(".confirmDelete")) return;
 
-      const confirmDiv = document.createElement("div");
-      confirmDiv.classList.add("confirmDelete");
-      confirmDiv.style.marginTop = "10px";
-      confirmDiv.style.padding = "10px";
-      confirmDiv.style.background = "#fff3f3";
-      confirmDiv.style.border = "1px solid #ff4e4e";
-      confirmDiv.style.borderRadius = "6px";
-      confirmDiv.style.display = "flex";
-      confirmDiv.style.justifyContent = "space-between";
-      confirmDiv.style.alignItems = "center";
+      if (confirm("Delete this team?")) {
 
-      confirmDiv.innerHTML = `
-        <span>Are you sure you want to delete this team?</span>
-        <div>
-          <button class="yesDelete" style="background:#ff4e4e; color:#fff; margin-right:5px; border:none; padding:5px 10px; border-radius:4px;">Yes</button>
-          <button class="noDelete" style="background:#ccc; color:#333; border:none; padding:5px 10px; border-radius:4px;">No</button>
-        </div>
-      `;
+        deleteDoc(doc(db, "teams", team.id));
+        showMessage("Team deleted");
 
-      div.appendChild(confirmDiv);
+      }
 
-      confirmDiv.querySelector(".noDelete").addEventListener("click", () => confirmDiv.remove());
-      confirmDiv.querySelector(".yesDelete").addEventListener("click", async () => {
-        await deleteDoc(doc(db, "teams", docSnap.id));
-        showMessage("✅ Team deleted successfully!");
-        loadTeams();
-      });
     });
 
     teamsList.appendChild(div);
+
   });
 }
 
-// Initial load
-loadTeams();
+/* ---------------- REALTIME TEAMS ---------------- */
+
+onSnapshot(collection(db, "teams"), snapshot => {
+
+  allTeams = snapshot.docs.map(docSnap => ({
+    id: docSnap.id,
+    ...docSnap.data()
+  }));
+
+  renderTeams(allTeams);
+
+});
+
+/* ---------------- SEARCH ---------------- */
+
+searchInput.addEventListener("input", () => {
+
+  const value = searchInput.value.toLowerCase();
+
+  const filtered = allTeams.filter(t =>
+    t.teamName.toLowerCase().includes(value)
+  );
+
+  renderTeams(filtered);
+
+});

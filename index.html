@@ -1,17 +1,68 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Elite Soccer Academy - Professional Training</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <!-- Google Font -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<title>Everest FC Football Academy | Professional Soccer Training in Faridabad</title>
+
+<meta name="description" content="Everest FC Football Academy in Faridabad offers professional soccer coaching, youth development programs, elite training, and goalkeeper academy.">
+<meta name="keywords" content="Everest FC, football academy Faridabad, soccer training India, youth football coaching, goalkeeper academy">
+<meta name="author" content="Everest FC">
+<meta name="robots" content="index, follow">
+
+<link rel="canonical" href="https://everestfacademy.com/">
+
+<!-- Open Graph -->
+<meta property="og:title" content="Everest FC Football Academy">
+<meta property="og:description" content="Professional football coaching and youth development programs in Faridabad.">
+<meta property="og:url" content="https://everestfacademy.com">
+<meta property="og:image" content="https://everestfacademy.com/images/logo.png">
+<meta property="og:type" content="website">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Everest FC Football Academy">
+<meta name="twitter:description" content="Professional soccer coaching and youth development programs.">
+<meta name="twitter:image" content="https://everestfacademy.com/images/logo.png">
+
+<!-- Favicon -->
+<link rel="icon" type="image/png" href="/images/logo.png">
+
+<!-- Preconnect for faster font loading -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
 
-  <!-- CSS -->
-  <link rel="stylesheet" href="/css/style.css">
+<!-- CSS -->
+<link rel="stylesheet" href="/css/style.css">
+
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "SportsOrganization",
+ "name": "Everest FC Football Academy",
+ "url": "https://everestfacademy.com/",
+ "logo": "https://everestfacademy.com/images/logo.png",
+ "sport": "Football",
+ "telephone": "+91-9654836936",
+ "address": {
+   "@type": "PostalAddress",
+   "streetAddress": "YMCA Sports Complex, Sector 17",
+   "addressLocality": "Faridabad",
+   "addressRegion": "Haryana",
+   "postalCode": "121002",
+   "addressCountry": "India"
+ }
+}
+</script>
+
+
 </head>
+
 <body>
 
   <!-- Progress Bar -->
@@ -19,9 +70,9 @@
     
   <!-- Header -->
   <header id="header">
-    <nav>
+    <nav aria-label="Main Navigation">
       <div class="logo" onclick="scrollToSection('home')">
-        <div class="logo-icon"><img src="/images/logo.png" alt="no logo" height="76rem" width="76rem"></div>
+        <div class="logo-icon"><img src="/images/logo.png" alt="Everest FC Football Academy logo" height="76" width="76"></div>
         <span class="club-name">Everest FC</span>
       </div>
       <ul class="nav-links" id="navLinks">
@@ -35,18 +86,22 @@
         <li><a href="admin.html">Admin</a></li>
         <li><a onclick="scrollToSection('contact')" class="nav-cta">Contact</a></li>
       </ul>
-      <div class="menu-toggle" id="menuToggle"><span></span><span></span><span></span></div>
+      <div class="menu-toggle"
+role="button"
+tabindex="0"
+aria-label="Toggle navigation menu"
+aria-controls="navLinks"><span></span><span></span><span></span></div>
     </nav>
   </header>
-
+<main>
   <!-- Hero Section -->
   <section class="hero" id="home">
     <div class="floating-ball">⚽</div>
     <div class="floating-ball">⚽</div>
     <div class="floating-ball">⚽</div>
     <div class="hero-content">
-      <div class="hero-badge">🏆 Professional Soccer Training</div>
-      <h1>Develop Your<br><span>Football Excellence</span></h1>
+      <div class="hero-badge">🏆 Professional Football Training</div>
+      <h1>Develop Your<br><span>Football Excellence</span><br>in Faridabad</h1>
       <p>World-class coaching and training facilities designed to transform talented players into professional athletes.</p>
       <div class="hero-buttons">
         <button class="btn-primary" onclick="scrollToSection('contact')">Start Your Journey</button>
@@ -80,8 +135,11 @@
   </div>
 
   <!-- Programs Section -->
-  <section class="programs" id="programs">
-    <h2 class="animate-on-scroll">Training Programs</h2>
+  <section class="programs" id="programs" aria-labelledby="programs-heading">
+
+<h2 id="programs-heading" class="animate-on-scroll">
+Training Programs
+</h2>
     <p class="section-subtitle animate-on-scroll">Tailored development pathways for every skill level</p>
     <div class="programs-grid">
       <div class="program-card animate-on-scroll">
@@ -126,9 +184,14 @@
     </div>
   </section>
 
+  
+
   <!-- Coaches Section -->
-  <section class="coaches" id="coaches">
-    <h2 class="animate-on-scroll">Our Coaching Staff</h2>
+  <section class="coaches" id="coaches" aria-labelledby="coaches-heading">
+
+<h2 id="coaches-heading" class="animate-on-scroll">
+Our Coaching Staff
+</h2>
     <p class="section-subtitle animate-on-scroll">Learn from experienced professionals with proven track records</p>
     <div class="coaches-grid">
       <div class="coach-card animate-on-scroll">
@@ -159,8 +222,11 @@
   </section>
 
   <!-- Facilities Section -->
-  <section class="facilities" id="facilities">
-    <h2 class="animate-on-scroll">World-Class Facilities</h2>
+  <section class="facilities" id="facilities" aria-labelledby="facilities-heading">
+
+<h2 id="facilities-heading" class="animate-on-scroll">
+World-Class Facilities
+</h2>
     <p class="section-subtitle animate-on-scroll">Train with the best equipment and infrastructure</p>
     <div class="facilities-grid">
       <div class="facility-card animate-on-scroll">
@@ -187,8 +253,11 @@
   </section>
 
   <!-- Testimonials Section -->
-  <section class="testimonials" id="testimonials">
-    <h2 class="animate-on-scroll">What Parents Say</h2>
+  <section class="testimonials" id="testimonials" aria-labelledby="testimonials-heading">
+
+<h2 id="testimonials-heading" class="animate-on-scroll">
+What Parents Say
+</h2>
     <p class="section-subtitle animate-on-scroll">Hear from our community</p>
     <div class="testimonials-grid">
       <div class="testimonial-card animate-on-scroll">
@@ -225,9 +294,11 @@
   </section>
 
  <!-- Gallery Preview -->
-<section class="gallery-section" id="gallery-preview">
+<section class="gallery-section" id="gallery-preview" aria-labelledby="gallery-heading">
   <div class="gallery-header">
-    <h2 class="animate-on-scroll">Gallery</h2>
+    <h2 id="gallery-heading" class="animate-on-scroll">
+Gallery
+</h2>
     <p class="section-subtitle animate-on-scroll">Moments from our academy</p>
 
   </div>
@@ -240,9 +311,58 @@
 
 </section>
 
+<section class="faq" aria-labelledby="faq-heading">
+
+<h2 id="faq-heading">Frequently Asked Questions</h2>
+
+<div class="faq-item">
+<button class="faq-question">
+What age groups can join Everest FC?
+<span class="faq-icon">+</span>
+</button>
+
+<div class="faq-answer">
+<p>Players aged 5–18 can join our youth and elite football training programs.</p>
+</div>
+</div>
+
+<div class="faq-item">
+<button class="faq-question">
+Where is Everest FC located?
+<span class="faq-icon">+</span>
+</button>
+
+<div class="faq-answer">
+<p>YMCA Sports Complex, Sector 17, Faridabad, Haryana.</p>
+</div>
+</div>
+
+<div class="faq-item">
+<button class="faq-question">
+Do beginners need prior football experience?
+<span class="faq-icon">+</span>
+</button>
+
+<div class="faq-answer">
+<p>No. Our youth development program is designed for beginners as well as experienced players.</p>
+</div>
+</div>
+
+<div class="faq-item">
+<button class="faq-question">
+How can I register for training?
+<span class="faq-icon">+</span>
+</button>
+
+<div class="faq-answer">
+<p>You can contact us through the form below or call us directly to schedule a trial session.</p>
+</div>
+</div>
+
+</section>
 
   <!-- Contact Section -->
-<section class="contact" id="contact">
+<section class="contact" id="contact" aria-labelledby="contact-heading">
   <h2 class="animate-on-scroll">Get In Touch</h2>
   <p class="section-subtitle animate-on-scroll">Start your journey to professional football today</p>
 
@@ -283,7 +403,7 @@
   </form>
 </section>
 
-
+</main>
   <!-- Footer -->
 <footer>
   <div class="footer-container">
@@ -327,6 +447,6 @@
   <script type="text/javascript"
         src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js">
 </script>
-  <script src="/js/main.js"></script>
+  <script src="/js/main.js" defer></script>
 </body>
 </html>

@@ -1,131 +1,125 @@
-const galleryContainer = document.getElementById('galleryContainer');
-const folderPath = '/images/gallery/img';
-const maxTry = 1000;
-const extensions = ['jpg', 'jpeg', 'png', 'webp'];
+import {
+  initMenuToggle,
+  initProgressBar,
+  initHeaderScroll,
+  initScrollTop,
+  initScrollAnimations
+} from "./ui.js";
 
-let galleryData = [];
+initMenuToggle();
+initProgressBar();
+initHeaderScroll();
+initScrollTop();
+initScrollAnimations();
 
-function loadGallery() {
-    // 🔥 STEP 1: CLEAR EVERYTHING
-    galleryContainer.innerHTML = '';
-    galleryData = [];
-    localStorage.removeItem('gallery-images');
+const galleryContainer = document.getElementById("galleryContainer");
 
-    let index = 1;
+const folderPath = "/images/gallery/img";
+const extensions = ["jpg","jpeg","png","webp"];
+const maxTry = 200;
 
-    function tryLoadNext() {
-        if (index > maxTry) {
-            // 🔥 STEP 4: SAVE FINAL RESULT
-            localStorage.setItem('gallery-images', JSON.stringify(galleryData));
-            console.log(`Gallery rebuilt with ${galleryData.length} images`);
-            return;
-        }
+async function loadGallery(){
 
-        let extIndex = 0;
+if(!galleryContainer) return;
 
-        function tryExtension() {
-            if (extIndex >= extensions.length) {
-                index++;
-                tryLoadNext();
-                return;
-            }
+galleryContainer.innerHTML = "";
 
-            const ext = extensions[extIndex];
-            const src = `${folderPath}${index}.${ext}`;
-            const img = new Image();
-            img.src = src;
+const images = [];
 
-            img.onload = () => {
-                // 🔥 STEP 3: STORE IMAGE
-                galleryData.push({
-                    url: src,
-                    title: `Everest FA`
-                });
+for(let i=1;i<=maxTry;i++){
 
-                const div = document.createElement('div');
-                div.className = 'gallery-item animate-on-scroll';
-                div.innerHTML = `
-                    <img src="${src}" alt="Gallery Image ${index}">
-                    <div class="gallery-overlay">
-                        <p>Everest FA</p>
-                    </div>
-                `;
-                galleryContainer.appendChild(div);
+let loaded=false;
 
-                index++;
-                tryLoadNext();
-            };
+for(const ext of extensions){
 
-            img.onerror = () => {
-                extIndex++;
-                tryExtension();
-            };
-        }
+const src=`${folderPath}${i}.${ext}`;
 
-        tryExtension();
-    }
+const exists = await checkImage(src);
 
-    tryLoadNext();
+if(exists){
+
+images.push(src);
+loaded=true;
+break;
+
 }
 
-// Scroll animation
-function animateOnScroll() {
-    document.querySelectorAll('.animate-on-scroll').forEach(el => {
-        const rect = el.getBoundingClientRect();
-        if (rect.top < window.innerHeight * 0.9) {
-            el.classList.add('animated');
-        }
-    });
 }
 
-window.addEventListener('scroll', animateOnScroll);
-window.addEventListener('load', () => {
-    loadGallery();
-    animateOnScroll();
-});
-// ------------------- Scroll To Section -------------------
-function scrollToSection(id) {
-    const element = document.getElementById(id);
-    if (element) {
-        const offset = 80;
-        const elementPosition = element.getBoundingClientRect().top + window.pageYOffset;
-        window.scrollTo({ top: elementPosition - offset, behavior: 'smooth' });
-    }
-    document.getElementById('navLinks').classList.remove('active');
+if(!loaded) break;
+
 }
 
+renderGallery(images);
 
-// ------------------- Menu Toggle -------------------
-document.getElementById('menuToggle').addEventListener('click', () => {
-    document.getElementById('navLinks').classList.toggle('active');
-});
-// ------------------- Progress Bar -------------------
-window.addEventListener('scroll', () => {
-    const header = document.getElementById('header');
-    const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
-    const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-    const scrolled = (winScroll / height) * 100;
-    document.getElementById('progressBar').style.width = scrolled + '%';
+}
 
-    if (window.scrollY > 50) header.classList.add('scrolled');
-    else header.classList.remove('scrolled');
+function checkImage(src){
+
+return new Promise(resolve=>{
+
+const img=new Image();
+
+img.onload=()=>resolve(true);
+img.onerror=()=>resolve(false);
+
+img.src=src;
+
 });
 
-// ------------------- Scroll Animations -------------------
-function initScrollAnimations() {
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('animated');
-
-                // Animate numbers
-                if (entry.target.classList.contains('stat-card') && !animatedNumbers) {
-                    animateNumbers();
-                    animatedNumbers = true;
-                }
-            }
-        });
-    }, { threshold: 0.1 });
-
-    document.querySelectorAll('.animate-on-scroll').forEach(el => observer.observe(el));
 }
+
+function renderGallery(images){
+
+const html = images.map(src=>`
+
+<div class="gallery-item animate-on-scroll">
+
+<img src="${src}" alt="Everest FC gallery image" loading="lazy">
+
+<div class="gallery-overlay">
+<p>Everest FC</p>
+</div>
+
+</div>
+
+`).join("");
+
+galleryContainer.innerHTML=html;
+
+initScrollAnimations();
+
+initLightbox();
+
+}
+
+function initLightbox(){
+
+const lightbox=document.getElementById("lightbox");
+const lightboxImg=document.getElementById("lightbox-img");
+const closeBtn=document.querySelector(".lightbox-close");
+
+if(!lightbox || !lightboxImg) return;
+
+document.querySelectorAll(".gallery-item img").forEach(img=>{
+
+img.addEventListener("click",()=>{
+
+lightboxImg.src=img.src;
+lightbox.style.display="flex";
+
+});
+
+});
+
+closeBtn.onclick=()=>lightbox.style.display="none";
+
+lightbox.addEventListener("click",(e)=>{
+if(e.target===lightbox){
+lightbox.style.display="none";
+}
+});
+
+}
+window.addEventListener("load",loadGallery);
+

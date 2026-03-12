@@ -1,165 +1,335 @@
+/* ================= ROOT VARIABLES ================= */
+
+:root{
+--primary:#4e8cff;
+--primary-dark:#3a6ed9;
+--danger:#ef4444;
+--danger-dark:#dc2626;
+--border:#d1d5db;
+--bg:#f4f6fb;
+--card:#ffffff;
+--text:#374151;
+--shadow:0 8px 24px rgba(0,0,0,0.08);
+}
+
+
 /* ================= GLOBAL ================= */
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-  font-family: 'Inter', sans-serif;
+
+*{
+box-sizing:border-box;
+margin:0;
+padding:0;
+font-family:'Inter',sans-serif;
 }
 
-body {
-  background: #f0f4ff;
-  padding: 20px;
-  color: #333;
+body{
+background:var(--bg);
+padding:20px;
+color:#333;
 }
 
-h2, h3, h4 {
-  margin-bottom: 15px;
-  color: #1f2937;
+
+/* ================= TOP BAR ================= */
+
+.topbar{
+display:flex;
+justify-content:space-between;
+align-items:center;
+margin-bottom:25px;
 }
 
-button {
-  cursor: pointer;
-  border: none;
-  border-radius: 6px;
-  padding: 8px 14px;
-  background: #4e8cff;
-  color: #fff;
-  font-weight: 600;
-  transition: 0.2s;
+#logoutBtn{
+background:var(--primary);
+color:white;
+padding:8px 14px;
+border:none;
+border-radius:6px;
+cursor:pointer;
+font-weight:600;
 }
 
-button:hover {
-  background: #3a6ed9;
+#logoutBtn:hover{
+background:var(--primary-dark);
 }
 
-input {
-  padding: 10px 12px;
-  margin: 8px 0;
-  border: 1px solid #ccc;
-  border-radius: 6px;
-  width: 100%;
-  font-size: 14px;
-  transition: border-color 0.2s, box-shadow 0.2s;
+
+/* ================= DASHBOARD LAYOUT ================= */
+
+.dashboard-container{
+display:grid;
+grid-template-columns:420px 1fr;
+gap:30px;
+align-items:start;
 }
 
-input:focus {
-  border-color: #4e8cff;
-  box-shadow: 0 0 5px rgba(78, 140, 255, 0.3);
-  outline: none;
+.left-panel{
+display:flex;
+flex-direction:column;
+gap:20px;
 }
 
-form {
-  background: #ffffff;
-  padding: 30px 25px;
-  border-radius: 12px;
-  box-shadow: 0 6px 20px rgba(0,0,0,0.05);
-  margin-bottom: 30px;
-  position: relative;
+.right-panel{
+display:flex;
+flex-direction:column;
+gap:20px;
 }
 
-/* ================= MESSAGE BOX ================= */
-#message {
-  padding: 12px 20px;
-  border-radius: 8px;
-  margin-bottom: 20px;
-  font-weight: 600;
-  text-align: center;
-  font-size: 14px;
-  display: none; /* hidden by default */
-  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+
+/* ================= SEARCH BAR ================= */
+
+.search-section input{
+width:100%;
+padding:10px 12px;
+border:1px solid var(--border);
+border-radius:6px;
+font-size:14px;
 }
 
-/* Success and error colors handled via JS */
-
-/* ================= PLAYERS ================= */
-.playersContainer .player {
-  background: #e7f0ff;
-  padding: 12px 15px;
-  margin-bottom: 12px;
-  border-radius: 10px;
-  position: relative;
-  transition: background 0.2s;
+.search-section input:focus{
+outline:none;
+border-color:var(--primary);
+box-shadow:0 0 5px rgba(78,140,255,0.3);
 }
 
-.playersContainer .player:hover {
-  background: #d6e4ff;
+
+/* ================= FORM CARD ================= */
+
+.form-card{
+background:var(--card);
+padding:25px;
+border-radius:12px;
+box-shadow:0 6px 18px rgba(0,0,0,0.06);
 }
 
-.removePlayer {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  background: #ff4e4e;
-  padding: 4px 8px;
-  font-size: 12px;
-  border-radius: 4px;
+
+/* ================= FORM ================= */
+
+.admin-form{
+display:flex;
+flex-direction:column;
+gap:15px;
 }
 
-.removePlayer:hover {
-  background: #d93a3a;
+.form-group{
+display:flex;
+flex-direction:column;
+gap:6px;
 }
 
-/* ================= TEAMS ================= */
-.team {
-  background: #ffffff;
-  border-radius: 12px;
-  padding: 20px;
-  margin-bottom: 25px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+input{
+padding:10px;
+border:1px solid var(--border);
+border-radius:6px;
+font-size:14px;
 }
 
-.team-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 15px;
-  flex-wrap: wrap;
+input:focus{
+outline:none;
+border-color:var(--primary);
+box-shadow:0 0 5px rgba(78,140,255,0.3);
 }
 
-.team-header button {
-  margin-left: 5px;
+
+/* ================= BUTTONS ================= */
+
+button{
+cursor:pointer;
+border:none;
+border-radius:6px;
+padding:8px 14px;
+font-weight:600;
+background:var(--primary);
+color:white;
+transition:all .15s ease;
 }
 
-table {
-  width: 100%;
-  border-collapse: collapse;
-  margin-top: 12px;
+button:hover{
+background:var(--primary-dark);
 }
 
-th, td {
-  border: 1px solid #ccc;
-  padding: 8px 12px;
-  text-align: left;
-  font-size: 14px;
+button:active{
+transform:scale(.96);
 }
 
-th {
-  background: #4e8cff;
-  color: #fff;
-  font-weight: 600;
-  text-align: center;
+.admin-buttons{
+display:flex;
+gap:10px;
+margin-top:10px;
 }
 
-td {
-  text-align: center;
+
+/* ================= PLAYER CARDS ================= */
+
+#playersContainer{
+margin-top:10px;
+display:flex;
+flex-direction:column;
+gap:12px;
 }
+
+.player-card{
+background:var(--card);
+border:1px solid #e5e7eb;
+border-radius:10px;
+overflow:hidden;
+box-shadow:0 3px 8px rgba(0,0,0,0.04);
+}
+
+
+/* PLAYER SUMMARY (collapsed row) */
+
+.player-summary{
+display:grid;
+grid-template-columns:60px 1fr 120px auto auto;
+align-items:center;
+gap:10px;
+padding:10px 12px;
+background:#f8fafc;
+font-size:14px;
+}
+
+.player-title{
+font-weight:600;
+}
+
+.player-name-preview{
+font-weight:500;
+}
+
+/* PLAYER EDITOR (expanded form) */
+
+/* PLAYER EDITOR (collapsed by default) */
+
+.player-editor{
+display:none;
+padding:15px;
+border-top:1px solid #e5e7eb;
+grid-template-columns:1fr 1fr;
+gap:12px;
+}
+
+/* show editor when card opened */
+
+.player-card.open .player-editor{
+display:grid;
+}
+
+.player-editor .full{
+grid-column:1 / -1;
+}
+
+
+/* PLAYER BUTTONS */
+
+.togglePlayer{
+background:var(--primary);
+color:white;
+border:none;
+padding:6px 10px;
+border-radius:6px;
+font-size:13px;
+cursor:pointer;
+}
+
+.togglePlayer:hover{
+background:var(--primary-dark);
+}
+
+.removePlayer{
+background:var(--danger);
+color:white;
+border:none;
+padding:6px 10px;
+border-radius:6px;
+font-size:13px;
+cursor:pointer;
+}
+
+.removePlayer:hover{
+background:var(--danger-dark);
+}
+
+
+/* ================= TEAM CARDS ================= */
+
+.team{
+background:white;
+padding:20px;
+border-radius:12px;
+box-shadow:0 8px 20px rgba(0,0,0,0.06);
+margin-bottom:20px;
+transition:all .2s ease;
+}
+
+.team:hover{
+transform:translateY(-2px);
+box-shadow:0 12px 30px rgba(0,0,0,0.1);
+}
+
+.team-header{
+display:flex;
+justify-content:space-between;
+align-items:center;
+margin-bottom:10px;
+}
+
+.team-actions{
+display:flex;
+gap:8px;
+}
+
+.edit{
+background:var(--primary);
+}
+
+.delete{
+background:var(--danger);
+}
+
+
+/* ================= TABLE ================= */
+
+table{
+width:100%;
+border-collapse:collapse;
+margin-top:10px;
+font-size:14px;
+}
+
+th{
+background:var(--primary);
+color:white;
+padding:10px;
+font-weight:600;
+}
+
+td{
+padding:10px;
+border-bottom:1px solid #e5e7eb;
+text-align:center;
+}
+
+tbody tr:hover{
+background:#f3f6ff;
+}
+
+
+/* ================= MESSAGE ================= */
+
+.message{
+padding:10px;
+border-radius:6px;
+margin-bottom:15px;
+display:none;
+}
+
 
 /* ================= RESPONSIVE ================= */
-@media (max-width: 700px) {
-  .team-header {
-    flex-direction: column;
-    align-items: flex-start;
-  }
 
-  .team-header button {
-    margin: 5px 0 0 0;
-  }
+@media (max-width:900px){
 
-  input, button {
-    font-size: 14px;
-  }
+.dashboard-container{
+grid-template-columns:1fr;
+}
 
-  form {
-    padding: 25px 20px;
-  }
 }

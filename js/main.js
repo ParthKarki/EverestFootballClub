@@ -131,9 +131,14 @@ function scrollToSection(id) {
 
 
 // ------------------- Menu Toggle -------------------
-document.getElementById('menuToggle').addEventListener('click', () => {
-    document.getElementById('navLinks').classList.toggle('active');
-});
+const menuToggle = document.getElementById('menuToggle');
+const navLinks = document.getElementById('navLinks');
+
+if (menuToggle && navLinks) {
+    menuToggle.addEventListener('click', () => {
+        navLinks.classList.toggle('active');
+    });
+}
 
 // ------------------- Close Modal on Outside Click -------------------
 window.addEventListener('click', (e) => {
@@ -147,7 +152,7 @@ window.addEventListener('scroll', () => {
     if (hero) hero.style.transform = `translateY(${scrolled * 0.5}px)`;
 });
 function rebuildGalleryFromFolder() {
-    const folderPath = '/images/gallery/img';
+    const folderPath = "/images/gallery";
     const maxTry = 100;
     const extensions = ['jpg', 'jpeg', 'png', 'webp'];
 
@@ -171,7 +176,7 @@ function rebuildGalleryFromFolder() {
                 return;
             }
 
-            const src = `${folderPath}${index}.${extensions[extIndex]}`;
+            const src = `${folderPath}img${index}.${extensions[extIndex]}`;
             const img = new Image();
             img.src = src;
 
@@ -195,6 +200,23 @@ function rebuildGalleryFromFolder() {
 
     tryNext();
 }
+
+document.querySelectorAll(".faq-question").forEach(btn => {
+
+btn.addEventListener("click", () => {
+
+const item = btn.parentElement;
+
+item.classList.toggle("active");
+
+});
+
+});
+
+
+document.querySelectorAll("img").forEach(img=>{
+img.onload=()=>img.classList.add("loaded");
+});
 
 // ==================== CONTACT FORM ====================
 document.addEventListener("DOMContentLoaded", function () {
