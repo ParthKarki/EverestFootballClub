@@ -176,7 +176,7 @@ function rebuildGalleryFromFolder() {
                 return;
             }
 
-            const src = `${folderPath}img${index}.${extensions[extIndex]}`;
+            const src = `${folderPath}/img${index}.${extensions[extIndex]}`;
             const img = new Image();
             img.src = src;
 
