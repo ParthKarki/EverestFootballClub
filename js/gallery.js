@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import {
   initMenuToggle,
   initProgressBar,
@@ -6,12 +5,6 @@ import {
   initScrollTop,
   initScrollAnimations
 } from "./ui.js";
-=======
-const galleryContainer = document.getElementById('galleryContainer');
-const folderPath = 'images/gallery/img';
-const maxTry = 200;
-const extensions = ['jpg', 'jpeg', 'png', 'webp'];
->>>>>>> 3089d77d1e33815589b3ed624237eb7c0df18393
 
 initMenuToggle();
 initProgressBar();
@@ -21,7 +14,7 @@ initScrollAnimations();
 
 const galleryContainer = document.getElementById("galleryContainer");
 
-const folderPath = "/images/gallery/img";
+const folderPath = "images/gallery/img";
 const extensions = ["jpg","jpeg","png","webp"];
 const maxTry = 200;
 
@@ -104,9 +97,7 @@ function initLightbox(){
 
 const lightbox=document.getElementById("lightbox");
 const lightboxImg=document.getElementById("lightbox-img");
-const closeBtn=document.querySelector(".lightbox-close");
-
-if(!lightbox || !lightboxImg) return;
+const close=document.querySelector(".lightbox-close");
 
 document.querySelectorAll(".gallery-item img").forEach(img=>{
 
@@ -119,19 +110,13 @@ lightbox.style.display="flex";
 
 });
 
-closeBtn.onclick=()=>lightbox.style.display="none";
+close.onclick=()=>lightbox.style.display="none";
 
-lightbox.addEventListener("click",(e)=>{
-if(e.target===lightbox){
-lightbox.style.display="none";
-}
-});
+lightbox.onclick=e=>{
+if(e.target===lightbox) lightbox.style.display="none";
+};
 
 }
+
 window.addEventListener("load",loadGallery);
 
-<<<<<<< HEAD
-=======
-    document.querySelectorAll('.animate-on-scroll').forEach(el => observer.observe(el));
-}
->>>>>>> 3089d77d1e33815589b3ed624237eb7c0df18393
