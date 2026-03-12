@@ -423,3 +423,10 @@ height:220px;
 
 }
 
+
+#header,
+header,
+nav{
+border-bottom:none !important;
+box-shadow:none !important;
+}
