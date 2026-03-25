@@ -143,18 +143,77 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // FAQ FIX
+    // FAQ
     document.querySelectorAll(".faq-question").forEach(btn => {
         btn.addEventListener("click", () => {
             const item = btn.parentElement;
             item.classList.toggle("active");
         });
     });
-  // IMAGE LOAD FIX (MOVE HERE)
+
+    // IMAGE LOAD
     document.querySelectorAll("img").forEach(img => {
         img.onload = () => img.classList.add("loaded");
     });
-    
+
+    // EMAIL FORM
+    emailjs.init("Jv4ZWm5CNAkUSFpEA");
+
+    const form = document.getElementById("contact-form");
+    const status = document.getElementById("contact-status");
+
+    if (form && status) {
+        form.addEventListener("submit", function (e) {
+            e.preventDefault();
+
+            if (form.company.value.trim() !== "") return;
+
+            const name = form.name.value.trim();
+            const email = form.email.value.trim();
+            const phone = form.phone.value.trim();
+            const message = form.message.value.trim();
+
+            if (!name || !email || !phone || !message) {
+                status.style.color = "#dc2626";
+                status.textContent = "❌ Please fill in all fields";
+                return;
+            }
+
+            const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailPattern.test(email)) {
+                status.style.color = "#dc2626";
+                status.textContent = "❌ Please enter a valid email";
+                return;
+            }
+
+            const submitBtn = form.querySelector(".submit-btn");
+            submitBtn.disabled = true;
+            submitBtn.textContent = "Sending... ⏳";
+
+            status.style.color = "#2563eb";
+            status.textContent = "⏳ Sending your message...";
+
+            emailjs
+                .sendForm("service_boygds7", "template_500sthk", form)
+                .then(() => {
+                    status.style.color = "#16a34a";
+                    status.textContent = "✅ Message sent successfully!";
+                    form.reset();
+                    submitBtn.disabled = false;
+                    submitBtn.textContent = "Send Message";
+
+                    setTimeout(() => (status.textContent = ""), 4000);
+                })
+                .catch((err) => {
+                    console.error("EmailJS Error:", err);
+                    status.style.color = "#dc2626";
+                    status.textContent = "❌ Failed to send message";
+                    submitBtn.disabled = false;
+                    submitBtn.textContent = "Send Message";
+                });
+        });
+    }
+
 });
 
 // ------------------- Close Modal on Outside Click -------------------
@@ -218,66 +277,3 @@ function rebuildGalleryFromFolder() {
     tryNext();
 }
 
-// ==================== CONTACT FORM ====================
-document.addEventListener("DOMContentLoaded", function () {
-  // Initialize EmailJS
-  emailjs.init("Jv4ZWm5CNAkUSFpEA"); // Replace with your EmailJS public key
-
-  const form = document.getElementById("contact-form");
-  const status = document.getElementById("contact-status");
-
-  if (!form || !status) return;
-
-  form.addEventListener("submit", function (e) {
-    e.preventDefault(); // Prevent page reload
-
-    // Honeypot spam check
-    if (form.company.value.trim() !== "") return; // Bot detected
-
-    const name = form.name.value.trim();
-    const email = form.email.value.trim();
-    const phone = form.phone.value.trim();
-    const message = form.message.value.trim();
-
-    // Validation
-    if (!name || !email || !phone || !message) {
-      status.style.color = "#dc2626";
-      status.textContent = "❌ Please fill in all fields";
-      return;
-    }
-
-    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailPattern.test(email)) {
-      status.style.color = "#dc2626";
-      status.textContent = "❌ Please enter a valid email";
-      return;
-    }
-
-    // Disable submit button while sending
-    const submitBtn = form.querySelector(".submit-btn");
-    submitBtn.disabled = true;
-    submitBtn.textContent = "Sending... ⏳";
-    status.style.color = "#2563eb";
-    status.textContent = "⏳ Sending your message...";
-
-    // Send email via EmailJS
-    emailjs
-      .sendForm("service_boygds7", "template_500sthk", form)
-      .then(() => {
-        status.style.color = "#16a34a";
-        status.textContent = "✅ Message sent successfully!";
-        form.reset();
-        submitBtn.disabled = false;
-        submitBtn.textContent = "Send Message";
-
-        setTimeout(() => (status.textContent = ""), 4000);
-      })
-      .catch((err) => {
-        console.error("EmailJS Error:", err);
-        status.style.color = "#dc2626";
-        status.textContent = "❌ Failed to send message. Try again!";
-        submitBtn.disabled = false;
-        submitBtn.textContent = "Send Message";
-      });
-  });
-});
