@@ -6,26 +6,95 @@
 <title>Legal | Everest FC Football Academy</title>
 
 <style>
+:root {
+  --primary-blue: #0A2E6D;
+  --secondary-blue: #1E5BB8;
+  --accent-gold: #F2B705;
+  --bg: #F8FAFC;
+}
+
+/* Page */
 body {
   font-family: Arial, sans-serif;
-  line-height: 1.6;
-  padding: 40px;
+  background: var(--bg);
+  margin: 0;
+  padding: 0;
+  color: #1f2937;
+}
+
+/* Container */
+.legal-container {
   max-width: 900px;
-  margin: auto;
+  margin: 60px auto;
+  background: #ffffff;
+  padding: 50px;
+  border-radius: 16px;
+  box-shadow: 0 20px 50px rgba(0,0,0,0.08);
 }
 
+/* Title */
+.page-title {
+  text-align: center;
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: var(--primary-blue);
+  margin-bottom: 10px;
+}
+
+.page-subtitle {
+  text-align: center;
+  color: #6b7280;
+  margin-bottom: 30px;
+}
+
+/* Headings */
 h1 {
-  color: #0d47a1;
-  margin-top: 40px;
+  font-size: 1.4rem;
+  color: var(--primary-blue);
+  margin-top: 35px;
+  margin-bottom: 10px;
+  border-left: 4px solid var(--accent-gold);
+  padding-left: 10px;
 }
 
+/* Text */
 p {
   margin: 10px 0;
+  line-height: 1.7;
+  color: #4b5563;
+  font-size: 0.95rem;
+}
+
+/* Footer */
+.legal-footer {
+  margin-top: 40px;
+  padding-top: 20px;
+  border-top: 1px solid #e5e7eb;
+  text-align: center;
+  font-size: 0.85rem;
+  color: #6b7280;
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .legal-container {
+    padding: 30px 20px;
+    margin: 30px 15px;
+  }
+
+  .page-title {
+    font-size: 2rem;
+  }
 }
 </style>
 
 </head>
 <body>
+
+<div class="legal-container">
+
+<h1 class="page-title">Legal Information</h1>
+<p class="page-subtitle">Everest FC Football Academy Policies & Terms</p>
 
 <h1>Privacy Policy</h1>
 <p>Everest FC Football Academy collects personal information including player name, parent/guardian details, contact number, and email address.</p>
@@ -60,8 +129,13 @@ p {
 <p>This website may use cookies to improve user experience and analyze traffic.</p>
 
 <p>You can disable cookies through your browser settings.</p>
-  
-<p>© 2026 Everest FC. All rights reserved.</p>
-<p>Unauthorized use or reproduction is prohibited.</p>
+
+<div class="legal-footer">
+  <p>© 2026 Everest FC. All rights reserved.</p>
+  <p>Unauthorized use or reproduction is prohibited.</p>
+</div>
+
+</div>
+
 </body>
 </html>
