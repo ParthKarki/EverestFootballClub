@@ -1590,3 +1590,23 @@ gap:1.8rem;
 .footer-legal a:hover::after {
   width: 100%;
 }
+.footer-info {
+  color: #9ca3af;
+  line-height: 1.7;
+  font-size: 0.95rem;
+}
+
+.footer-info a {
+  color: var(--secondary-blue);
+  text-decoration: none;
+  transition: 0.3s;
+}
+
+.footer-info a:hover {
+  color: #ffffff;
+}
+.footer-legal {
+  margin-top: 1.5rem;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(255,255,255,0.08);
+}
